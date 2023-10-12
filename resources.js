@@ -1,22 +1,10 @@
 /** Here we can define any JavaScript-based resources and extensions to tables
-
-export class MyCustomResource extends tables.TableName {
-	// we can define our own custom POST handler
-	post(content) {
-		// do something with the incoming content;
-		return super.post(content);
-	}
-	// or custom GET handler
-	get() {
-		// we can modify this resource before returning
-		return super.get();
+ 
+export class Topic extends tables.Topic {
+	// we can define our own custom subscribe handler for doing things like returning previous messages
+	async subscribe(options) {
+		if (!options.startTime) // return last five messages
+			options.previousCount = 5;
 	}
 }
  */
-// we can also define a custom resource without a specific table
-export class Greeting extends Resource {
-	// a "Hello, world!" handler
-	get() {
-		return { greeting: 'Hello, world!' };
-	}
-}
